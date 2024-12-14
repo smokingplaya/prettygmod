@@ -1,0 +1,18 @@
+{
+  "version": "0.1.0",
+  "patches": [
+    {
+      "name": "GModCEFFix",
+      "author": "Solstice Game Studios",
+      "repository": "https://github.com/solsticegamestudios/GModCEFCodecFix",
+      "version": "23.0.1",
+
+      "entity": {
+        "type": "zip",
+        "url": "",
+        "sha256": "",
+        "unpack": "/garrysmod/"
+      }
+    }
+  ]
+}
