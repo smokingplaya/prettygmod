@@ -10,12 +10,15 @@ async fn runtime() -> anyhow::Result<()> {
   actions::data::request()
     .await?;
 
-  println!();
-
   actions::version::check()
     .await?;
 
-  println!();
+  log::space();
+
+  let _game_path = actions::gmod::get_path()
+    .await?;
+
+  log::space();
 
   actions::patch::all()
     .await?;

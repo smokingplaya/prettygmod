@@ -7,6 +7,20 @@ lazy_static::lazy_static! {
 }
 
 #[derive(Deserialize, Serialize, Clone)]
+pub struct Url(String);
+
+impl Url {
+  pub fn get_file_name(
+    &self
+  ) -> anyhow::Result<String> {
+    self.0.rsplit('/').next()
+      .filter(|filename| !filename.is_empty())
+      .map(|filename| filename.to_string())
+      .ok_or_else(|| anyhow::anyhow!("Invalid URL format: no filename found"))
+  }
+}
+
+#[derive(Deserialize, Serialize, Clone)]
 pub enum EntityTypes {
   #[serde(rename = "zip")]
   Zip,
@@ -20,7 +34,10 @@ pub enum EntityTypes {
 
 #[derive(Deserialize, Serialize, Clone)]
 pub struct Entity {
-  pub r#type: EntityTypes
+  pub r#type: EntityTypes,
+  pub url: Url,
+  pub sha256: String,
+  pub unpack: String
 }
 
 #[derive(Deserialize, Serialize, Clone)]
@@ -34,7 +51,7 @@ pub struct Patch {
 
 #[derive(Deserialize, Serialize, Clone)]
 pub struct Body {
-  pub pathes: Vec<Patch>,
+  pub patches: Vec<Patch>,
   pub version: String,
 }
 

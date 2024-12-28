@@ -46,6 +46,19 @@ pub(crate) fn action(msg: &str) {
   let _ = log(&format!("{} {msg}", "$".yellow()));
 }
 
+pub(crate) fn subaction(msg: &str) {
+  let _ = log(&format!("{} {msg}", "$".bright_yellow()));
+}
+
+pub(crate) fn success(msg: &str) {
+  let _ = log(&format!("{} {msg}", "!".green()));
+}
+
 pub(crate) fn error(msg: &str) {
   let _ = log(&format!("{} {msg}", "?".red()));
+}
+
+pub(crate) fn space() {
+  // println!("{}", "|".bright_black());
+  println!();
 }

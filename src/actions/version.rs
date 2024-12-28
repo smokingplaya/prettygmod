@@ -1,5 +1,7 @@
 use hashbrown::HashMap;
 use serde::{Deserialize, Serialize};
+use crate::log;
+
 use super::data;
 
 const VERSION: &str = env!("CARGO_PKG_VERSION");
@@ -32,6 +34,8 @@ pub(crate) async fn check() -> anyhow::Result<()> {
   version.eq(VERSION)
     .then(|| ())
     .ok_or_else(|| anyhow::anyhow!("You have to update the tool! New version {version}, current version {VERSION}."))?;
+
+  log::success(&format!("Tool is up to date (v{VERSION})"));
 
   Ok(())
 }
